@@ -1,10 +1,7 @@
-# Continuous Integration using GitHub Actions of Python Data Science Project: Individual Project One
+# Matrix Testing: Mini Project 4
 ### by Rakeen Rouf
 
-![install packages](https://img.shields.io/badge/install%20packages-success-green)
-![Linting](https://img.shields.io/badge/lint-success-green) 
-![Format](https://img.shields.io/badge/format-success-green) 
-![Test](https://img.shields.io/badge/test-success-green)  
+[![MatrixTesting](https://github.com/nogibjj/matrix_testing/actions/workflows/ci.yml/badge.svg)](https://github.com/nogibjj/matrix_testing/actions/workflows/ci.yml)
 
 ---
 **Summary**
