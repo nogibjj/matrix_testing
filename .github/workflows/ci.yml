@@ -41,7 +41,7 @@ jobs:
       - name: Create status badge
         run: |
           status=$([[ ${{ job.status }} == 'success' ]] && echo 'passing' || echo 'failing')
-          /usr/bin/badgen $status Build
+          /home/runner/work/bin/badgen $status Build
         id: badge
 
       - name: Add badge to README
