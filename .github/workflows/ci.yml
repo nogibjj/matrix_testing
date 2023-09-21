@@ -9,50 +9,21 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+        os : [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
       - name: install packages
         run: make install
-        env:
-          STATUS: ${{ job.status }}
       - name: lint
         run: make lint
-        env:
-          STATUS: ${{ job.status }}
       - name: format
         run: make format
-        env:
-          STATUS: ${{ job.status }}
       - name: test
         run: make test
-        env:
-          STATUS: ${{ job.status }}
-
-      - name: Set up status badges
-        run: |
-            echo "::set-output name=STATUS::${{ job.status }}"
-            echo "::set-output name=JOB::${{ github.job }}"
-        id: status
-
-      - name: Install badgen
-        run: npm install -g badgen
-      
-      - name: Create status badge
-        run: |
-          if [ "${{ job.status }}" == "success" ]; then
-            status="passing"
-          else
-            status="failing"
-          fi
-          badge_url="https://img.shields.io/badge/Build-${status}-${status}.svg"
-          echo "::set-output name=badge_url::$badge_url"
-        id: badge
-      
-      - name: Add badge to README
-        run: |
-          echo "[![Build](${{ steps.badge.outputs.badge_url }})](${{ github.run_number }})" >> README.md
-  
       - name: List files
         run: |
             pwd
