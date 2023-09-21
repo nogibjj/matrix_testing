@@ -62,3 +62,4 @@ To get started with this template, follow these steps:
 
 6. **Requirement.txt:**
    - Update the `requirements.txt` file to ensure all necessary Python packages have been included.
+[![Build](https://img.shields.io/badge/Build-passing-passing.svg)](18)
