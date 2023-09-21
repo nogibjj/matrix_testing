@@ -60,14 +60,15 @@ jobs:
             echo "::set-output name=JOB::${{ github.job }}"
         id: status
         
+      - name: Install badgen
+        run: npm install -g badgen
+      
       - name: Create status badge
-        uses: shieldsio/shields@v5.1.0
-        with:
-            label: ${{ steps.status.outputs.JOB }}
-            message: ${{ steps.status.outputs.STATUS }}
-            color: ${{ steps.status.outputs.STATUS == 'success' && 'green' || 'red' }}
+        run: |
+          status=$([[ ${{ job.status }} == 'success' ]] && echo 'passing' || echo 'failing')
+          badgen $status Build
         id: badge
         
       - name: Add badge to README
         run: |
-            echo "![${{ steps.badge.outputs.label }}](${{ steps.badge.outputs.schema }})" >> README.md
+          echo "![${{ steps.badge.outputs.subject }}](${{ steps.badge.outputs.badge }})" >> README.md
