@@ -3,7 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap, Normalize
 import numpy as np
-import os
 
 
 def return_25th_quantile(data_: pd.DataFrame, target: str) -> float:
@@ -141,11 +140,6 @@ def plot_hist(data_: pd.DataFrame, col: str, jupyter: bool = False) -> None:
 
     if not jupyter:
         visualization_path = "output/visualization_hist.png"
-
-        try:
-            os.remove(visualization_path)
-        except FileNotFoundError:
-            pass
 
         plt.savefig(visualization_path)  # save png
 
