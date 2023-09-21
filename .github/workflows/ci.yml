@@ -38,8 +38,10 @@ jobs:
       - name: Install badgen
         run: npm install -g badgen
       
-      - name: Print system path
-        run: echo $PATH
+      - name: Add badgen to system path
+        run: |
+          echo 'export PATH="$PATH:/usr/local/lib/node_modules/badgen/bin"' >> $GITHUB_ENV
+          source $GITHUB_ENV
       
       - name: Create status badge
         run: |
