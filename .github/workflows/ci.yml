@@ -12,10 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
       - name: install packages
         run: make install
         env:
@@ -49,16 +45,13 @@ jobs:
           else
             status="failing"
           fi
-          badgen $status Build
+          badge_url="https://img.shields.io/badge/Build-${status}-${status}.svg"
+          echo "::set-output name=badge_url::$badge_url"
         id: badge
-
+      
       - name: Add badge to README
         run: |
-          echo "![${{ steps.badge.outputs.subject }}](${{ steps.badge.outputs.badge }})" >> README.md
-
-      
-          - name: Run main script
-          run: python src/script_descriptive_stats.py
+          echo "[![Build](${{ steps.badge.outputs.badge_url }})](${{ github.run_number }})" >> README.md
   
       - name: List files
         run: |
