@@ -38,9 +38,6 @@ jobs:
       - name: Install badgen
         run: npm install -g badgen
       
-      - name: Check badgen installation
-        run: which badgen
-      
       - name: Create status badge
         run: |
           status=$([[ ${{ job.status }} == 'success' ]] && echo 'passing' || echo 'failing')
