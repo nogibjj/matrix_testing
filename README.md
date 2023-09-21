@@ -1,18 +1,15 @@
 # Continuous Integration using GitHub Actions of Python Data Science Project: Individual Project One
 ### by Rakeen Rouf
 
-[![Format](https://github.com/nogibjj/ContinuousIntegrationusingGitHubActionsofPythonDataScienceProject/actions/workflows/format.yml/badge.svg)](https://github.com/nogibjj/ContinuousIntegrationusingGitHubActionsofPythonDataScienceProject/actions/workflows/format.yml) [![Lint](https://github.com/nogibjj/ContinuousIntegrationusingGitHubActionsofPythonDataScienceProject/actions/workflows/lint.yml/badge.svg)](https://github.com/nogibjj/ContinuousIntegrationusingGitHubActionsofPythonDataScienceProject/actions/workflows/lint.yml) [![OnInstall](https://github.com/nogibjj/ContinuousIntegrationusingGitHubActionsofPythonDataScienceProject/actions/workflows/install.yml/badge.svg)](https://github.com/nogibjj/ContinuousIntegrationusingGitHubActionsofPythonDataScienceProject/actions/workflows/install.yml) [![Test](https://github.com/nogibjj/ContinuousIntegrationusingGitHubActionsofPythonDataScienceProject/actions/workflows/test.yml/badge.svg)](https://github.com/nogibjj/ContinuousIntegrationusingGitHubActionsofPythonDataScienceProject/actions/workflows/test.yml)
-
----
-
-**Walk Through Youtube Video**
-[Youtube](https://youtu.be/YduYJFkaXa0)
+![install packages](https://img.shields.io/badge/install%20packages-success-green)
+![Linting](https://img.shields.io/badge/lint-success-green) 
+![Format](https://img.shields.io/badge/format-success-green) 
+![Test](https://img.shields.io/badge/test-success-green)  
 
 ---
 **Summary**
 
-This project serves as an illustrative guide for implementing Continuous Integration (CI) using GitHub Actions in Python-based Data Science projects. By adopting CI, it helps maintain code quality and consistency throughout the development process. The workflows include linting, formatting, installing dependencies, and running tests, ensuring that these critical steps are automatically executed with every push and pull request to the repository.
-
+This prohject illustrates the use of matrix testing using Github workflows. Matrix testing is done to make sure your code works for multiple versions of your chosen programming lanugae and operating systems.
 ---
 **Project Structure**
 
