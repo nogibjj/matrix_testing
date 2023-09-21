@@ -63,12 +63,15 @@ jobs:
       - name: Install badgen
         run: npm install -g badgen
       
+      - name: Print system path
+        run: echo $PATH
+      
       - name: Create status badge
         run: |
           status=$([[ ${{ job.status }} == 'success' ]] && echo 'passing' || echo 'failing')
           badgen $status Build
         id: badge
-        
+
       - name: Add badge to README
         run: |
           echo "![${{ steps.badge.outputs.subject }}](${{ steps.badge.outputs.badge }})" >> README.md
