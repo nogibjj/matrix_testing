@@ -37,8 +37,13 @@ def return_median(data_: pd.DataFrame, target: str) -> float:
     return target_median
 
 
-def visualize_dataset(data_: pd.DataFrame, outcome_var: str, target_var: str,
-                       inteaction_term: str, jupyter: bool=False) -> None:
+def visualize_dataset(
+    data_: pd.DataFrame,
+    outcome_var: str,
+    target_var: str,
+    inteaction_term: str,
+    jupyter: bool = False,
+) -> None:
     """Visualizes the passed data. Makes a scatter plot of target vs outcome
     variables. Colors the scatter plot by the interaction term. Draws a best
     fit linear regression line for each category of the iinteration
@@ -48,7 +53,7 @@ def visualize_dataset(data_: pd.DataFrame, outcome_var: str, target_var: str,
     # Get the unique categories from the interaction_term column
     categories = data_[inteaction_term].unique()
     # Define a colormap based on the number of unique categories
-    cmap = plt.colormaps['tab10']
+    cmap = plt.colormaps["tab10"]
 
     # Create a ListedColormap with normalized values
     norm = Normalize(vmin=0, vmax=len(categories) - 1)
@@ -61,7 +66,8 @@ def visualize_dataset(data_: pd.DataFrame, outcome_var: str, target_var: str,
         data_[target_var],
         data_[outcome_var],
         c=data_[inteaction_term].apply(lambda x: list(categories).index(x)),
-        cmap=custom_cmap)
+        cmap=custom_cmap,
+    )
 
     # Add labels
     plt.xlabel(target_var)
@@ -75,56 +81,65 @@ def visualize_dataset(data_: pd.DataFrame, outcome_var: str, target_var: str,
         slope, intercept = np.polyfit(data_c[target_var], data_c[outcome_var], 1)
         best_fit_line = slope * data_c[target_var] + intercept
 
-        plt.plot(data_c[target_var],
-                best_fit_line,
-                label=f'Best Fit For Interaction Category: {cat}')
-
+        plt.plot(
+            data_c[target_var],
+            best_fit_line,
+            label=f"Best Fit For Interaction Category: {cat}",
+        )
 
     # Plot mean, median, std dev, and 25th quantil;e
     mean = return_mean(data_, target_var)
-    plt.axvline(x=mean, color='red', linestyle='--', label=f'Mean: {mean:.2f}')
+    plt.axvline(x=mean, color="red", linestyle="--", label=f"Mean: {mean:.2f}")
 
     median = return_median(data_, target_var)
-    plt.axvline(x=median, color='green', linestyle='--', label=f'Median: {median:.2f}')
+    plt.axvline(x=median, color="green", linestyle="--", label=f"Median: {median:.2f}")
 
     stand_dev = return_std_dev(data_, target_var)
-    plt.axvline(x=mean + stand_dev, color='orange', linestyle='--',
-                label=f'Mean + StDev: {stand_dev + mean:.2f}')
-    plt.axvline(x=mean - stand_dev, color='orange', linestyle='--',
-                label=f'Mean - StDev: {mean - stand_dev:.2f}')
+    plt.axvline(
+        x=mean + stand_dev,
+        color="orange",
+        linestyle="--",
+        label=f"Mean + StDev: {stand_dev + mean:.2f}",
+    )
+    plt.axvline(
+        x=mean - stand_dev,
+        color="orange",
+        linestyle="--",
+        label=f"Mean - StDev: {mean - stand_dev:.2f}",
+    )
 
     if jupyter:
-        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
     else:
-        plt.legend(loc='best')
+        plt.legend(loc="best")
 
     plt.show()
-    visualization_path = 'output/visualization.png'
+    visualization_path = "output/visualization.png"
 
     if not jupyter:
         plt.savefig(visualization_path)  # save png
 
         # Save generated report
-        summary_report_path = r'output/generated_report.md'
+        summary_report_path = r"output/generated_report.md"
         with open(summary_report_path, "w", encoding="utf-8") as report:
-            report.write(f'Mean: {round(mean, 3)} \n \n \n')
-            report.write(f'Median: {round(median, 3)} \n \n \n')
-            report.write(f'Standard Deviation: {round(stand_dev, 3)} \n \n \n')
+            report.write(f"Mean: {round(mean, 3)} \n \n \n")
+            report.write(f"Median: {round(median, 3)} \n \n \n")
+            report.write(f"Standard Deviation: {round(stand_dev, 3)} \n \n \n")
             report.write("\n![Visualization](visualization.png)\n")
             report.write("\n![Viz](visualization_hist.png)\n")
 
 
-def plot_hist(data_: pd.DataFrame, col: str, jupyter: bool=False) -> None:
+def plot_hist(data_: pd.DataFrame, col: str, jupyter: bool = False) -> None:
     """Plot histogram of the given column"""
     plt.figure()
-    plt.hist(data_[col], bins=10, color='green', edgecolor='black', linewidth=1.2)
+    plt.hist(data_[col], bins=10, color="green", edgecolor="black", linewidth=1.2)
     plt.title(f"Histogram of {col}")
     plt.xlabel(col)
     plt.ylabel("Frequency")
     plt.show()
 
     if not jupyter:
-        visualization_path = 'output/visualization_hist.png'
+        visualization_path = "output/visualization_hist.png"
         plt.savefig(visualization_path)  # save png
 
 
@@ -132,10 +147,10 @@ if __name__ == "__main__":
     data = pd.read_csv("data/iris_data.csv")
     TARGET_COLUMN = "sepal_length"
 
-    print('Target Column: ', 'TARGET_COLUMN')
-    print('25th Quantile: ', return_25th_quantile(data, TARGET_COLUMN))
-    print('Mean: ', return_mean(data, TARGET_COLUMN))
-    print('Median: ', return_median(data, TARGET_COLUMN))
+    print("Target Column: ", "TARGET_COLUMN")
+    print("25th Quantile: ", return_25th_quantile(data, TARGET_COLUMN))
+    print("Mean: ", return_mean(data, TARGET_COLUMN))
+    print("Median: ", return_median(data, TARGET_COLUMN))
     print("Standard Deviation: ", return_std_dev(data, TARGET_COLUMN))
 
     plot_hist(data, "petal_width", jupyter=False)
