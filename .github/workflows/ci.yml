@@ -55,10 +55,19 @@ jobs:
           git push
 
       - name: Set up status badges
-        uses: badgen/badgen-action@v1
+        run: |
+            echo "::set-output name=STATUS::${{ job.status }}"
+            echo "::set-output name=JOB::${{ github.job }}"
+        id: status
+        
+      - name: Create status badge
+        uses: shieldsio/shields@v5.1.0
         with:
-          subject: ${{ github.job }}
-          status: ${{ env.STATUS }}
-          color: ${{ env.STATUS == 'success' && 'green' || 'red'}}
-          label: ${{ github.job }}
-          icon: github
+            label: ${{ steps.status.outputs.JOB }}
+            message: ${{ steps.status.outputs.STATUS }}
+            color: ${{ steps.status.outputs.STATUS == 'success' && 'green' || 'red' }}
+        id: badge
+        
+      - name: Add badge to README
+        run: |
+            echo "![${{ steps.badge.outputs.label }}](${{ steps.badge.outputs.schema }})" >> README.md
