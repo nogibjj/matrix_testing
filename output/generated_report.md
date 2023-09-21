@@ -1,10 +1,10 @@
-Mean: 5.843 
+Mean: 3.057 
  
  
-Median: 5.8 
+Median: 3.0 
  
  
-Standard Deviation: 0.828 
+Standard Deviation: 0.436 
  
  
 
